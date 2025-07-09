@@ -100,17 +100,12 @@ if __name__ == "__main__":
     main()
 ```
 
-### 입력 기능 설명
-- **어디서 입력?**:
-  - `st.number_input("에피소드 수", min_value=10, max_value=50, value=20)`: 웹 화면에 "에피소드 수" 입력란 표시. 10~50 사이 숫자 입력, 기본값 20.
-  - `st.button("학습")`: "학습" 버튼 클릭 시 입력된 에피소드 수로 학습 시작.
-- **입력 후 동작**:
-  - 입력한 에피소드 수(예: 20)만큼 학습.
-  - 매 5번 에피소드마다 보상(예: "에피소드 0, 보상: -7")과 경로 그래프 표시.
-  - 마지막에 보상 그래프(에피소드 수만큼 점) 출력, 보상은 -5~-10에서 +10 근처로 올라감.
+### 오류 해결 확인
+- **143번째 줄 문제**: `Streamlit Cloud → **Manage App** → **Reboot**`는 위 코드에 없음. 이 코드는 `SyntaxError` 유발 문구 완전히 제거.
+- **보상 문제**: 온도(`self.temp`)가 1.0에서 0.1로 감소(`max(0.1, self.temp * 0.95)`)해 학습 후반에 목표 도달 빈도 올라가며 보상 증가(-5~-10 → +10).
 
-### 의존성 (Requirements)
-Streamlit Cloud에서 이 앱(`mini_prob.py`)을 배포하려면 아래 두 파일이 필요해:
+### 의존성 파일
+Streamlit Cloud에서 `pro1.py`를 배포하려면 다음 파일 필요:
 
 1. **`requirements.txt`**:
    ```plaintext
@@ -118,9 +113,6 @@ Streamlit Cloud에서 이 앱(`mini_prob.py`)을 배포하려면 아래 두 파�
    numpy==1.26.4
    matplotlib==3.8.3
    ```
-   - **streamlit**: 웹 앱 실행.
-   - **numpy**: Q-table과 소프트맥스 계산.
-   - **matplotlib**: 경로와 보상 그래프.
 
 2. **`packages.txt`**:
    ```plaintext
@@ -128,14 +120,13 @@ Streamlit Cloud에서 이 앱(`mini_prob.py`)을 배포하려면 아래 두 파�
    pkg-config
    python3-distutils
    ```
-   - `matplotlib` 설치에 필요한 시스템 패키지.
 
-### 수행
+### 수행 단계
 
 2. **GitHub 푸시**:
    ```bash
-   git add prob.py requirements.txt packages.txt
-   git commit -m "입력 기능 포함 간단 앱"
+   git add pro1.py requirements.txt packages.txt
+   git commit -m "SyntaxError 해결, 간단 입력 앱"
    git push origin main
    ```
 
@@ -149,14 +140,16 @@ Streamlit Cloud에서 이 앱(`mini_prob.py`)을 배포하려면 아래 두 파�
    source venv/bin/activate  # Linux/Mac
    venv\Scripts\activate     # Windows
    pip install streamlit numpy matplotlib
-   streamlit run prob.py
+   streamlit run pro1.py
    ```
-   - `http://localhost:8501`에서 입력란과 그래프 확인.
+   - `http://localhost:8501`에서 에피소드 수 입력란과 그래프 확인.
+
+### 앱 동작
+- **입력**: "에피소드 수" 입력란에 10~50 입력 (기본 20), "학습" 버튼 클릭.
+- **출력**: 에피소드 0, 4, 8, ...에서 보상(예: "에피소드 0, 보상: -7")과 5x5 그리드 경로 그래프. 마지막에 보상 그래프(상승 곡선).
+- **확률**: 소프트맥스로 행동 선택, 온도 감소로 학습 후반에 목표 도달 빈도 증가.
 
 ### 추가 확인
-- **입력 확인**: 앱 접속 시 "에피소드 수" 입력란과 "학습" 버튼 보이는지 확인. 입력 후 그래프 잘 나오는지 체크.
-- **보상 문제**: 온도 감소(`temp * 0.95`)로 보상이 -5~-10에서 +10으로 올라감. 그래프 하락하면 에피소드 수 늘려(예: 50).
-- **오류 시**: **Manage App** → **Logs** 공유.
-- **더 간단히 원하면**: 입력 기능 빼거나 다른 간소화 요청 말해!
-
-입력 기능 빠진 줄 알았던 거 바로 잡았어. 다른 거 필요하면 툭툭! 😎
+- **오류 없음**: `→` 문자는 코드에서 제거됨. 다른 `SyntaxError` 발생 시 `pro1.py` 내용 공유.
+- **보상 확인**: 보상 그래프가 하락하면 에피소드 수를 50으로 늘려봐 (`value=50`).
+- **로그**: 배포 문제 시 **Manage App** → **Logs** 공유.
