@@ -118,28 +118,7 @@ Streamlit Cloud에서 `pro1.py`를 배포하려면 다음 파일 필요:
    python3-distutils
    ```
 
-### 수행 단계
 
-2. **GitHub 푸시**:
-   ```bash
-   git add pro1.py requirements.txt packages.txt
-   git commit -m "SyntaxError 해결, 간단 입력 앱"
-   git push origin main
-   ```
-
-3. **Streamlit 재배포**:
-   - Streamlit Cloud  **Manage App**  **Reboot**.
-   - URL: `https://new-pro-9nxayfwmmipjzpbwrrrcud.streamlit.app/` 확인.
-
-4. **로컬 테스트**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate     # Windows
-   pip install streamlit numpy matplotlib
-   streamlit run pro1.py
-   ```
-   - `http://localhost:8501`에서 에피소드 수 입력란과 그래프 확인.
 
 ### 앱 동작
 - **입력**: "에피소드 수" 입력란에 10~50 입력 (기본 20), "학습" 버튼 클릭.
