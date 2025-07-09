@@ -128,7 +128,7 @@ Streamlit Cloud에서 `pro1.py`를 배포하려면 다음 파일 필요:
    ```
 
 3. **Streamlit 재배포**:
-   - Streamlit Cloud → **Manage App** → **Reboot**.
+   - Streamlit Cloud  **Manage App**  **Reboot**.
    - URL: `https://new-pro-9nxayfwmmipjzpbwrrrcud.streamlit.app/` 확인.
 
 4. **로컬 테스트**:
