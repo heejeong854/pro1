@@ -131,8 +131,6 @@ Streamlit Cloud에서 이 앱(`mini_prob.py`)을 배포하려면 아래 두 파�
    - `matplotlib` 설치에 필요한 시스템 패키지.
 
 ### 수행
-1. **코드 저장**:
-   - `prob.py`를 위 코드로 덮어쓰기. `→` 같은 오류 문자 없음 확인.
 
 2. **GitHub 푸시**:
    ```bash
